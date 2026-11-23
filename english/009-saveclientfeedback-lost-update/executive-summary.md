@@ -1,0 +1,20 @@
+# saveClientFeedback lost update
+
+**Status:** INFORMATIONAL  
+**Severity:** LOW  
+**File:** `app/portal/actions.ts:42-62`
+
+## Executive Summary
+
+Read-modify-write without atomicity; no locking; no version check; Last-Write-Wins overwrites concurrent submissions.
+
+**Impact:** Attachment data loss on concurrent requests, no PII exposure.
+
+**CVSS 4.0:** `AV:N/AC:H/AT:N/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N` → 2.7
+
+**Local PoC (localhost only):**
+```
+concurrent POSTs to saveClientFeedback
+```
+
+Local testing disclaimer: This documentation is for authorized local security research only. Do not test against systems you do not own or have written permission to assess.
