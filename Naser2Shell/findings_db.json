@@ -1,0 +1,68 @@
+{
+  "001": {
+    "id": "001",
+    "slug": "001-payload-secret-empty-default",
+    "dir": "english/001-payload-secret-empty-default",
+    "raw": "# finding.md\n\nFinding: 001-payload-secret-empty-default\nStatus: CONFIRMED\nSeverity: HIGH\nPrimary file: payload.config.ts:39\nRoot cause: secret: process.env.PAYLOAD_SECRET || ''\n\nLocal testing disclaimer: Testing performed only on localhost; no production systems affected.\n"
+  },
+  "002": {
+    "id": "002",
+    "slug": "002-portal-login-no-rate-limiting",
+    "dir": "english/002-portal-login-no-rate-limiting",
+    "raw": "# finding.md\n\nFinding: 002-portal-login-no-rate-limiting\nStatus: CONFIRMED\nSeverity: HIGH\nPrimary file: app/api/portal/login/route.ts\nRoot cause: No rate limiting\n\nLocal testing disclaimer: Testing performed only on localhost; no production systems affected.\n"
+  },
+  "003": {
+    "id": "003",
+    "slug": "003-thumbnail-resource-exhaustion",
+    "dir": "english/003-thumbnail-resource-exhaustion",
+    "raw": "# finding.md\n\nFinding: 003-thumbnail-resource-exhaustion\nStatus: CONFIRMED\nSeverity: HIGH\nPrimary file: app/api/generate-thumbnail/route.ts\nRoot cause: Arbitrary url\n\nLocal testing disclaimer: Testing performed only on localhost; no production systems affected.\n"
+  },
+  "004": {
+    "id": "004",
+    "slug": "004-contact-form-no-rate-limiting",
+    "dir": "english/004-contact-form-no-rate-limiting",
+    "raw": "# finding.md\n\nFinding: 004-contact-form-no-rate-limiting\nStatus: CONFIRMED\nSeverity: MEDIUM\nPrimary file: app/api/contact/route.ts\nRoot cause: No rate limiting\n\nLocal testing disclaimer: Testing performed only on localhost; no production systems affected.\n"
+  },
+  "005": {
+    "id": "005",
+    "slug": "005-upload-no-per-user-quota",
+    "dir": "english/005-upload-no-per-user-quota",
+    "raw": "# Upload endpoint without per-user quota\n\n**Status:** CONFIRMED  \n**Severity:** MEDIUM  \n**File:** `app/api/portal/attachments/upload/route.ts`\n\n## Finding\n\nNo global per-user quota; 20MB per file (MAX_ATTACHMENT_BYTES); filename controllable (addRandomSuffix:false); onUploadCompleted empty.\n\n**Impact:** Resource exhaustion via unlimited uploads, blob storage abuse.\n\n**CVSS 4.0:** `AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N` \u2192 5.9\n\n**Local PoC (localhost only):**\n```\ncurl -X POST http://localhost:3000/api/portal/attachments/upload -H 'Content-Type: application/json' -d '{\"type\":\"blob.generate-client-token\"}'\n```\n\nLocal testing disclaimer: This documentation is for authorized local security research only. Do not test against systems you do not own or have written permission to assess.\n"
+  },
+  "006": {
+    "id": "006",
+    "slug": "006-session-cookie-weak-attributes",
+    "dir": "english/006-session-cookie-weak-attributes",
+    "raw": "# Portal session cookie weak attributes\n\n**Status:** CONFIRMED  \n**Severity:** MEDIUM  \n**File:** `lib/portal-session.ts:26`\n\n## Finding\n\nCookie secure flag tied to NODE_ENV production; sameSite lax; no __Host prefix.\n\n**Impact:** MitM in dev, limited CSRF exposure.\n\n**CVSS 4.0:** `AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N` \u2192 5.3\n\n**Local PoC (localhost only):**\n```\ncurl -I http://localhost:3000/api/portal/login\n```\n\nLocal testing disclaimer: This documentation is for authorized local security research only. Do not test against systems you do not own or have written permission to assess.\n"
+  },
+  "007": {
+    "id": "007",
+    "slug": "007-preview-csrf-get",
+    "dir": "english/007-preview-csrf-get",
+    "raw": "# Preview draftMode activation via CSRF GET\n\n**Status:** CONFIRMED  \n**Severity:** MEDIUM  \n**File:** `app/preview/route.ts:6,15,28-29`\n\n## Finding\n\nState-changing GET activates draftMode().enable() without CSRF protection; no Origin/Referer check; no CSRF token.\n\n**Impact:** Victim browser forced into draft mode, sees unpublished content.\n\n**CVSS 4.0:** `AV:N/AC:L/AT:N/PR:N/UI:R/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N` \u2192 5.4\n\n**Local PoC (localhost only):**\n```\ncurl 'http://localhost:3000/preview?slug=home&collection=pages'\n```\n\nLocal testing disclaimer: This documentation is for authorized local security research only. Do not test against systems you do not own or have written permission to assess.\n"
+  },
+  "008": {
+    "id": "008",
+    "slug": "008-portal-jwt-no-client-binding",
+    "dir": "english/008-portal-jwt-no-client-binding",
+    "raw": "# Portal JWT not bound to client\n\n**Status:** CONFIRMED (with restrictions)  \n**Severity:** MEDIUM  \n**File:** `app/api/portal/login/route.ts:19, lib/portal-session.ts:26`\n\n## Finding\n\nJWT not bound to IP/User-Agent; stateless; no server-side invalidation; secure=false in dev.\n\n**Impact:** Stolen token works from any client until expiry (requires second theft vector).\n\n**CVSS 4.0:** `AV:N/AC:M/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N` \u2192 5.9\n\n**Local PoC (localhost only):**\n```\ncurl -X POST http://localhost:3000/api/portal/login -H 'Content-Type: application/json' -d '{\"email\":\"x\",\"password\":\"y\"}'\n```\n\nLocal testing disclaimer: This documentation is for authorized local security research only. Do not test against systems you do not own or have written permission to assess.\n"
+  },
+  "009": {
+    "id": "009",
+    "slug": "009-saveclientfeedback-lost-update",
+    "dir": "english/009-saveclientfeedback-lost-update",
+    "raw": "# saveClientFeedback lost update\n\n**Status:** INFORMATIONAL  \n**Severity:** LOW  \n**File:** `app/portal/actions.ts:42-62`\n\n## Finding\n\nRead-modify-write without atomicity; no locking; no version check; Last-Write-Wins overwrites concurrent submissions.\n\n**Impact:** Attachment data loss on concurrent requests, no PII exposure.\n\n**CVSS 4.0:** `AV:N/AC:H/AT:N/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N` \u2192 2.7\n\n**Local PoC (localhost only):**\n```\nconcurrent POSTs to saveClientFeedback\n```\n\nLocal testing disclaimer: This documentation is for authorized local security research only. Do not test against systems you do not own or have written permission to assess.\n"
+  },
+  "010": {
+    "id": "010",
+    "slug": "010-cms-origins-unconditional",
+    "dir": "english/010-cms-origins-unconditional",
+    "raw": "# Finding 010 \u2014 Unconditional CMS Origin Allowlist\n\n## Statement\n\n`cmsOrigins()` in `lib/cms-origins.ts` returns a set containing the four hard-coded\nproduction origins plus the origin parsed from the caller-supplied `serverURL`\n(`lib/cms-origins.ts:14`). The function only validates that the configured URL uses\nthe `http:` or `https:` scheme (`lib/cms-origins.ts:11-13`). It performs **no**\nvalidation of the host, subdomain, port, or suffix of the configured URL against a\ntrusted allowlist before adding it to the CORS/CSRF origin set.\n\n## Root cause\n\n```ts\n// lib/cms-origins.ts:9-15\nexport function cmsOrigins(serverURL: string): string[] {\n  const configuredURL = new URL(serverURL)                              // :10\n  if (!['https:', 'http:'].includes(configuredURL.protocol)) {          // :11\n    throw new Error('The CMS server URL must use HTTP or HTTPS.')        // :12\n  }\n  return [...new Set([...productionOrigins, configuredURL.origin])]      // :14\n}\n```\n\nOnly `configuredURL.protocol` is checked. `configuredURL.origin` is trusted and\nappended verbatim. There is no comparison against `productionOrigins`, no host\nallowlist, and no rejection of lookalike or user-influenced hosts.\n\n## Consumers\n\n`payload.config.ts` feeds the result directly into both Payload security controls:\n\n```ts\n// payload.config.ts:100-101\ncors: cmsOrigins(serverURL),\ncsrf: cmsOrigins(serverURL),\n```\n\n`serverURL` itself is derived from environment configuration:\n\n```ts\n// payload.config.ts:29-35\nconst serverURL =\n  process.env.NEXT_PUBLIC_SERVER_URL ||\n  (process.env.VERCEL_PROJECT_PRODUCTION_URL\n    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`\n    : process.env.VERCEL_URL\n      ? `https://${process.env.VERCEL_URL}`\n      : 'http://localhost:3000')\n```\n\n## Classification\n\nInformational / Low. The behaviour is a defense-in-depth gap that becomes a\nvulnerability only under a deployment misconfiguration (attacker-influenced\n`serverURL`). It is not remotely exploitable on a correctly configured deployment.\n\n## Prerequisites\n\nAn attacker must be able to influence `NEXT_PUBLIC_SERVER_URL` (or the Vercel\nfallback variables) so that the derived origin resolves to a domain the attacker\ncontrols, or the operator must otherwise introduce a hostile origin into the config.\n"
+  },
+  "011": {
+    "id": "011",
+    "slug": "011-missing-security-headers",
+    "dir": "english/011-missing-security-headers",
+    "raw": "# Finding 011 \u2014 Missing Global Security Headers\n\n## Statement\n\nThe Next.js configuration in `next.config.mjs` defines an HTTP header rule for a single\nroute only:\n\n```js\n// next.config.mjs:5-7\nasync headers() {\n  return [{ source: '/zertifikate/hexagon-cyber-security.pdf', headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] }]\n},\n```\n\nNo global (catch-all `source: '/(.*)'` or `/:path*`) header rules are defined. As a\nresult, responses across the application are served without the standard defensive\nHTTP security headers.\n\n## Missing headers\n\n| Header | Purpose | Status |\n| --- | --- | --- |\n| `Content-Security-Policy` | Mitigate XSS, injection, and unauthorized resource loads | Missing |\n| `Strict-Transport-Security` | Enforce HTTPS, prevent protocol downgrade | Missing |\n| `X-Frame-Options` / CSP `frame-ancestors` | Prevent clickjacking | Missing |\n| `X-Content-Type-Options: nosniff` | Prevent MIME sniffing | Missing |\n| `Referrer-Policy` | Limit referrer leakage | Missing |\n| `Permissions-Policy` | Restrict powerful browser features | Missing |\n\n## Root cause\n\nNo global security-header configuration exists in `next.config.mjs`. The only `headers()`\nentry targets a single PDF route for an SEO directive (`X-Robots-Tag: noindex`),\nunrelated to browser security hardening.\n\n## Classification\n\nConfirmed / Informational (Low). The absence of security headers is a confirmed\nconfiguration state. Its direct exploitability is limited (defense-in-depth), hence the\nLow rating; it raises the severity of other weaknesses (e.g. XSS, clickjacking) that\nwould otherwise be contained by these headers.\n\n## Prerequisites\n\nFor concrete impact, a secondary weakness must exist that these headers would mitigate\n(for example an XSS sink for CSP, a framing surface for clickjacking, or a MIME\nconfusion vector for `nosniff`). Absent such a weakness, the impact is reduced\ndefense-in-depth only.\n"
+  }
+}

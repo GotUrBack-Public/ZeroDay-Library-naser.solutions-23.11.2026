@@ -1,0 +1,57 @@
+[
+  {
+    "finding": "001",
+    "status": "CONFIRMED",
+    "evidence": "Empty default secret in: /workspace/app/english/001-payload-secret-empty-default/README.md, /workspace/app/english/001-payload-secret-empty-default/affected-code.md, /workspace/app/english/001-payload-secret-empty-default/attack-scenario.md, /workspace/app/english/001-payload-secret-empty-default/cvss-assessment.md, /workspace/app/english/001-payload-secret-empty-default/disclosure.md, /workspace/app/english/001-payload-secret-empty-default/exploit-walkthrough.md, /workspace/app/english/001-payload-secret-empty-default/finding.md, /workspace/app/english/001-payload-secret-empty-default/impact-assessment.md, /workspace/app/english/001-payload-secret-empty-default/poc.md, /workspace/app/english/001-payload-secret-empty-default/references.md, /workspace/app/english/001-payload-secret-empty-default/remediation.md, /workspace/app/english/001-payload-secret-empty-default/technical-analysis.md, /workspace/app/english/001-payload-secret-empty-default/verification.md, /workspace/app/german/exploits/001-payload-secret-empty-default/detection.md, /workspace/app/Naser2Shell/findings_db.json"
+  },
+  {
+    "finding": "002",
+    "status": "FIXED",
+    "evidence": "Rate limiting present: /workspace/app/.git/index, /workspace/app/english/002-portal-login-no-rate-limiting/README.md, /workspace/app/english/002-portal-login-no-rate-limiting/affected-code.md, /workspace/app/english/002-portal-login-no-rate-limiting/attack-scenario.md, /workspace/app/english/002-portal-login-no-rate-limiting/cvss-assessment.md, /workspace/app/english/002-portal-login-no-rate-limiting/disclosure.md, /workspace/app/english/002-portal-login-no-rate-limiting/exploit-walkthrough.md, /workspace/app/english/002-portal-login-no-rate-limiting/finding.md, /workspace/app/english/002-portal-login-no-rate-limiting/impact-assessment.md, /workspace/app/english/002-portal-login-no-rate-limiting/poc.md, /workspace/app/english/002-portal-login-no-rate-limiting/references.md, /workspace/app/english/002-portal-login-no-rate-limiting/remediation.md, /workspace/app/english/002-portal-login-no-rate-limiting/technical-analysis.md, /workspace/app/english/002-portal-login-no-rate-limiting/verification.md, /workspace/app/english/004-contact-form-no-rate-limiting/README.md, /workspace/app/english/004-contact-form-no-rate-limiting/affected-code.md, /workspace/app/english/004-contact-form-no-rate-limiting/attack-scenario.md, /workspace/app/english/004-contact-form-no-rate-limiting/cvss-assessment.md, /workspace/app/english/004-contact-form-no-rate-limiting/disclosure.md, /workspace/app/english/004-contact-form-no-rate-limiting/exploit-walkthrough.md, /workspace/app/english/004-contact-form-no-rate-limiting/finding.md, /workspace/app/english/004-contact-form-no-rate-limiting/impact-assessment.md, /workspace/app/english/004-contact-form-no-rate-limiting/poc.md, /workspace/app/english/004-contact-form-no-rate-limiting/references.md, /workspace/app/english/004-contact-form-no-rate-limiting/remediation.md, /workspace/app/english/004-contact-form-no-rate-limiting/technical-analysis.md, /workspace/app/english/004-contact-form-no-rate-limiting/verification.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/README.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/affected-code.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/attack-scenario.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/cvss-assessment.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/detection.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/exploit-walkthrough.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/finding.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/impact-assessment.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/poc.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/references.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/remediation.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/technical-analysis.md, /workspace/app/german/exploits/002-portal-login-no-rate-limiting/verification.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/README.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/affected-code.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/attack-scenario.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/cvss-assessment.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/detection.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/exploit-walkthrough.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/finding.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/impact-assessment.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/poc.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/references.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/remediation.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/technical-analysis.md, /workspace/app/german/exploits/004-contact-form-no-rate-limiting/verification.md, /workspace/app/Naser2Shell/findings_db.json, /workspace/app/Naser2Shell/naser2shell.py"
+  },
+  {
+    "finding": "003",
+    "status": "FIXED",
+    "evidence": "Thumbnail limits present: /workspace/app/.git/index, /workspace/app/Naser2Shell/naser2shell.py"
+  },
+  {
+    "finding": "004",
+    "status": "FIXED",
+    "evidence": "Rate limiting present"
+  },
+  {
+    "finding": "005",
+    "status": "FIXED",
+    "evidence": "Quota present: /workspace/app/.git/index, /workspace/app/english/005-upload-no-per-user-quota/README.md, /workspace/app/english/005-upload-no-per-user-quota/affected-code.md"
+  },
+  {
+    "finding": "006",
+    "status": "FIXED",
+    "evidence": "Cookie attributes present: /workspace/app/english/006-session-cookie-weak-attributes/README.md, /workspace/app/english/006-session-cookie-weak-attributes/affected-code.md, /workspace/app/english/006-session-cookie-weak-attributes/attack-scenario.md"
+  },
+  {
+    "finding": "007",
+    "status": "POTENTIAL",
+    "evidence": "Preview code found; manual review needed: /workspace/app/.git/index, /workspace/app/english/007-preview-csrf-get/README.md, /workspace/app/english/007-preview-csrf-get/affected-code.md"
+  },
+  {
+    "finding": "008",
+    "status": "FIXED",
+    "evidence": "Client binding present"
+  },
+  {
+    "finding": "009",
+    "status": "FIXED",
+    "evidence": "Concurrency control present"
+  },
+  {
+    "finding": "010",
+    "status": "POTENTIAL",
+    "evidence": "CMS origin code found: /workspace/app/.git/index, /workspace/app/english/010-cms-origins-unconditional/README.md, /workspace/app/english/010-cms-origins-unconditional/affected-code.md"
+  },
+  {
+    "finding": "011",
+    "status": "FIXED",
+    "evidence": "Security headers present: /workspace/app/.git/index, /workspace/app/english/011-missing-security-headers/README.md, /workspace/app/english/011-missing-security-headers/affected-code.md"
+  }
+]
